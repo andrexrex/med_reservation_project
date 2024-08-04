@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-login">
+        <div class="container-fluid-login" id="form">
+            <section id="form">
+                <div class="container fixed-width-container-login" id="form">
+                    <div class="row justify-content-md-center">
+                        <div class="col-12">
+                            <h2 class="mt-5 mb-4 display-5 text-center fs-1">LogIn</h2>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-12">
+                            <div class="border rounded shadow-sm overflow-hidden">
+                                <form action="{% url 'login' %}" method="post" id="form">
+                                    {% csrf_token %}
+                                    <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+                                        <div class="col-12">
+                                            <label for="username" class="form-label">Username<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="username" name="username" required>
+                                            {% if form.username.errors %}
+                                                <div class="error-message">{{ form.username.errors.0 }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            {% if form.password.errors %}
+                                                <div class="error-message">{{ form.password.errors.0 }}</div>
+                                            {% endif %}
+                                        </div>
+                                        {% if form.non_field_errors %}
+                                            <div class="col-12 error-message">
+                                                {{ form.non_field_errors }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button class="btn btn-secondary btn-lg" type="submit">Login</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

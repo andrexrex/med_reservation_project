@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand mx-5 mt-1" href="{% url 'home' %}">
+            <img src="{% static 'logo.png' %}" alt="logo" class="logo-img">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=#>About</a>
+                </li>
+                {% if user.user_profile.rol == 'arrendador' or user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href=#>Agregar Inmueble</a>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                <span class="d-inline-block nav-link">{{ user.email }}</span>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary nav-item text-light">LogOut</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-secondary nav-item reg">LogIn</a>
+                <a href="{% url 'register' %}" class="btn btn-primary nav-item reg">Register</a>
+                {% endif %}
+                <a href=# class="btn btn-outline-light nav-item conc">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href=# class="btn btn-outline-light nav-item conc">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
